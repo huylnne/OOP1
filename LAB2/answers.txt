@@ -1,0 +1,54 @@
+Câu 1 : If you create a constructor method to build a DVD by title then create a constructor method to build a DVD by category. Does JAVA allow you to do this?
+
+Có, Java cho phép bạn tạo nhiều constructor trong một lớp, khái niệm này được gọi là nạp chồng constructor (constructor overloading). Điều này có nghĩa là bạn có thể định nghĩa các constructor khác nhau với các tham số khác nhau để tạo đối tượng DVD bằng tiêu đề, thể loại, hoặc bất kỳ thuộc tính nào khác.
+Java cho phép nạp chồng constructor, vì vậy bạn có thể tạo nhiều constructor khác nhau để khởi tạo một đối tượng DVD bằng các thuộc tính khác nhau, chẳng hạn như tiêu đề hoặc thể loại. Ví dụ sau đây minh họa cách thực hiện điều này:
+	public class DVD {
+    private String title;
+    private String category;
+
+    // Constructor đầu tiên - tạo DVD bằng tiêu đề
+    public DVD(String title) {
+        this.title = title;
+        this.category = "Chưa xác định";  // Gán thể loại mặc định nếu chỉ có tiêu đề
+    }
+
+    // Constructor thứ hai - tạo DVD bằng thể loại
+    public DVD(String title, String category) {
+        this.title = title;
+        this.category = category;
+    }
+
+    // Phương thức để hiển thị thông tin DVD
+    public void displayInfo() {
+        System.out.println("Tiêu đề: " + title);
+        System.out.println("Thể loại: " + category);
+    }
+
+    public static void main(String[] args) {
+        // Tạo DVD chỉ với tiêu đề
+        DVD dvdByTitle = new DVD("Harry Potter");
+        dvdByTitle.displayInfo();
+
+        // Tạo DVD với tiêu đề và thể loại
+        DVD dvdByCategory = new DVD("Harry Potter", "Phim Phiêu Lưu");
+        dvdByCategory.displayInfo();
+    }
+}
+
+
+ Câu 2 : Why getter and setter methods are evil?
+ 1. Vi phạm Tính Đóng Gói:
+ - Làm Lộ Trạng Thái Nội Bộ: Getter và setter thường làm lộ các trường dữ liệu bên trong của một đối tượng, 
+ cho phép các lớp bên ngoài thay đổi trực tiếp chúng. 
+ Điều này vi phạm tính đóng gói, vì các lớp khác có thể truy cập hoặc thay đổi các hoạt động nội bộ của đối tượng thay vì tương tác qua các hành vi có ý nghĩa.
+ - Phá Vỡ Tính Trừu Tượng: Các đối tượng nên đại diện cho hành vi hơn là chỉ chứa dữ liệu. 
+ Khi sử dụng getter và setter, một đối tượng có thể trở thành một "kho chứa dữ liệu", khiến các thực thể bên ngoài kiểm soát hành vi của nó, làm suy yếu tính đóng gói.
+ 
+ 2.  Mã Thủ Tục trong Hướng Đối Tượng:
+ Getter và setter thường dẫn đến mã theo phong cách lập trình thủ tục trong mã hướng đối tượng.
+ Điều này có thể khiến mã của bạn đi ngược lại với nguyên tắc hướng đối tượng, nơi mà đối tượng nên đóng gói cả dữ liệu và hành vi.
+
+3 Vi Phạm Nguyên Tắc Demeter:
+
+Getter thường dẫn đến chuỗi gọi phương thức (ví dụ: object.getA().getB().getC()), tạo ra sự phụ thuộc chặt chẽ và vi phạm nguyên tắc Demeter, 
+khuyến nghị nên giảm thiểu việc biết quá nhiều về các đối tượng khác. Việc này dẫn đến cấu trúc mã khó bảo trì và cứng nhắc.
