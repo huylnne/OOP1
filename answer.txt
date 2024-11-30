@@ -1,0 +1,18 @@
+Cách sử dụng varargs linh hoạt hơn vì nó cho phép thêm bất kỳ số lượng 
+đĩa DVD nào mà không cần chỉ định mảng một cách rõ ràng. 
+
+
+Câu hỏi: Java là ngôn ngữ lập trình "Pass by Value" hay "Pass by Reference"? 
+Trả lời: Java luôn "Pass by Value". Điều này nghĩa là khi truyền một biến vào phương thức, một bản sao của giá trị biến đó được tạo ra và sử dụng bên trong phương thức. Đối với các kiểu dữ liệu nguyên thủy (như int, float, boolean), bản sao này là giá trị thực tế. Đối với các đối tượng (như DVD trong ví dụ), bản sao là giá trị của tham chiếu đến đối tượng, không phải bản sao của chính đối tượng.
+
+ 
+
+After the call of swap(jungleDVD, cinderellaDVD) why does the 
+title of these two objects still remain? 
+ Trả lời: Phương thức swap nhận vào hai tham chiếu, o1 và o2, trỏ đến hai đối tượng DVD. Bên trong swap, việc trao đổi giá trị của o1 và o2 chỉ ảnh hưởng đến các biến cục bộ bên trong phương thức. Nó không thay đổi giá trị của các biến jungleDVD và cinderellaDVD ở bên ngoài phương thức. Nói cách khác, o1 và o2 ban đầu trỏ đến cùng vị trí với jungleDVD và cinderellaDVD tương ứng. Sau khi swap, o1 và o2 trỏ đến vị trí khác nhau, nhưng jungleDVD và cinderellaDVD vẫn trỏ đến vị trí ban đầu.
+
+
+
+ After the call of changeTitle(jungleDVD, cinderellaDVD.getTitle()) 
+why is the title of the JungleDVD changed? 
+ Trả lời: Phương thức changeTitle nhận vào một tham chiếu dvd trỏ đến đối tượng JungleDVD và một chuỗi title. Bên trong phương thức, gọi dvd.setTitle(title) thực hiện thay đổi trực tiếp trên chính đối tượng mà dvd đang trỏ đến. Vì dvd và jungleDVD trỏ đến cùng một đối tượng trong bộ nhớ, nên việc thay đổi tiêu đề thông qua dvd sẽ ảnh hưởng đến đối tượng mà jungleDVD cũng đang tham chiếu. Bản sao giá trị tham chiếu được truyền vào, nhưng tham chiếu đó vẫn trỏ đến cùng một đối tượng gốc trong bộ nhớ.
